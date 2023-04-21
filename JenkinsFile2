@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    tools{
+        maven "3.6.0"
+    }
+    stages{
+        stage('Build Maven'){
+            steps{
+                bat 'mvn clean install'
+            }
+        }
+        stage('Build docker image'){
+            steps{
+                script{
+                   bat 'docker build -t devops_assignment:latest C:/Users/simrangawri/Desktop/devops_assignment/.'
+
+                }
+            }
+        }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                 withCredentials([string(credentialsId: 'dockerhub3', variable: 'dockerhubpwd')])  {
+                   bat 'docker login -u dockerhubpwd -p ${Mithu1456!}'
+
+}
+                   bat 'docker push simran123/devops_assignment'
+                }
+            }
+        }
+    }
+}

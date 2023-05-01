@@ -21,7 +21,7 @@ pipeline {
             steps{
                 script{
                                  bat 'docker login -u simrangawri325 -p "simran1234"'
-                                  bat 'docker push simrangawi325/dockerimg'
+                                  bat 'docker push simrangawi325/dockerimg:latest'
 
                 }
 

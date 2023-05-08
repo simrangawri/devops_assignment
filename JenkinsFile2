@@ -40,7 +40,7 @@ CONTAINER_PORT = "8000"
             stage('deploy to docker'){
                     steps{
                        script{
-bat "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} || true"
+bat "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} "
 bat "docker pull ${DOCKER_IMAGE_NAME}"
 bat "docker run -d --name ${CONTAINER_NAME} -p 8000:8000 ${DOCKER_IMAGE_NAME} "
 }

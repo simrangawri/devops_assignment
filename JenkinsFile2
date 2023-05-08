@@ -1,5 +1,16 @@
 pipeline {
     agent any
+    environment {
+
+      DOCKER_IMAGE_NAME = "simrangawri325/dockerimg"
+
+       CONTAINER_NAME = "spring-container"
+
+       HOST_PORT = "8000"
+
+       CONTAINER_PORT = "8000"
+
+   }
     tools{
         maven "3.6.0"
     }
@@ -30,9 +41,9 @@ pipeline {
             stage('deploy to docker'){
                     steps{
                         script{
-                           bat "docker stop my_new_container && docker rm my_new_container || true"
-                            bat "docker pull simrangawri325/dockerimg"
-                            bat "docker run -d --name my_new_container -p 8000:8000 simrangawri325/dockerimg"
+                           bat "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} || true"
+                            bat "docker pull ${DOCKER_IMAGE_NAME}"
+                            bat "docker run -d --name ${CONTAINER_NAME} -p 8000:8000 ${DOCKER_IMAGE_NAME} "
                         }
                     }
                 }

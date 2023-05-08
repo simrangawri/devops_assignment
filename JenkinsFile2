@@ -27,6 +27,15 @@ pipeline {
 
                                 }
             }
+            stage('deploy to docker'){
+                    steps{
+                        script{
+                           bat "docker stop my_new_container && docker rm my_new_container || true"
+                            bat "docker pull simrangawri325/dockerimg"
+                            bat "docker run -d --name my_new_container -p 8000:8000 simrangawri325/dockerimg"
+                        }
+                    }
+                }
         }
     }
     
